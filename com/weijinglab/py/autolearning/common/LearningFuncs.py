@@ -12,10 +12,14 @@ def sigmoid(x):
 # ソフトマックス関数
 def softmax(x):
     arr = np.array(x)
-    exp_sum = np.sum(np.exp(arr))
-    return np.exp(x)/exp_sum
+    arr_minus_max = arr - np.max(arr)
+    exp_sum = np.sum(np.exp(arr_minus_max))
+    return np.exp(x - np.max(arr))/exp_sum
 
 
-print(softmax([90 , 92]))
+def cross_entropy_error(y, t):
+    return np.sum(t * np.log(y) * -1)
 
+
+print(cross_entropy_error([90 , 92444], [0, 1]))
 
