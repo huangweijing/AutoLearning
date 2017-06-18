@@ -4,7 +4,7 @@ import os
 
 
 # MINSTのデータを読み込む
-class TrainningDataLoader:
+class TrainingDataLoader:
     __urlbase = ""
     __train_data = []
     __test_data = []
@@ -18,7 +18,7 @@ class TrainningDataLoader:
     PROPERTY_TRAIN_LABEL_NAME = "train_label"
     PROPERTY_TEST_LABEL_NAME = "test_label"
 
-    def __init__(self, property_file):
+    def __init__(self, property_file="./auto_learning.properties"):
         logging.info("TEST")
         # try:
         config = configparser.ConfigParser()
@@ -36,17 +36,17 @@ class TrainningDataLoader:
     def __download(self):
         pass
 
-    def getTrainningData(self):
+    def get_train_data(self):
         return self.__train_data
 
-    def getTestData(self):
+    def get_test_data(self):
         return self.__teat_data
 
-    def getTrainLabel(self):
+    def get_train_label(self):
         return self.__train_label
 
-    def getTestLabel(self):
+    def get_test_label(self):
         return self.__test_label
 
 
-TrainningDataLoader("%s%s" % (os.path.dirname(os.path.abspath(__file__)), "/autolearning.properties"))
+TrainingDataLoader("%s%s" % (os.path.dirname(os.path.abspath(__file__)), "/auto_learning.properties"))
