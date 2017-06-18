@@ -30,6 +30,15 @@ class TrainingDataLoader:
         self.__config.read(property_file)
         self.__download_all_stuff()
         self.__load()
+        self.__format_data()
+
+    def __format_data(self):
+        self.__train_data = self.__train_data.astype(np.float32)
+        self.__train_data = self.__train_data / 255.0
+        self.__train_data = self.__train_data.reshape(-1, 1, 28, 28)
+        self.__test_data = self.__test_data.astype(np.float32)
+        self.__test_data = self.__test_data / 255.0
+        self.__test_data = self.__test_data.reshape(-1, 1, 28, 28)
 
     def __load_data(self, filename):
         file_path = "%s/%s/%s" % (os.path.dirname(os.path.abspath(__file__)), self.MINST_DATA_DIR, filename)
@@ -65,7 +74,7 @@ class TrainingDataLoader:
     def __load(self):
         self.__train_data = self.__load_data(
             self.__config.get(self.PROPERTY_SECTION_NAME, self.PROPERTY_TRAIN_DATA_NAME))
-        self.__test_data = self.__load_label(
+        self.__test_data = self.__load_data(
             self.__config.get(self.PROPERTY_SECTION_NAME, self.PROPERTY_TEST_DATA_NAME))
         self.__train_label = self.__load_label(
             self.__config.get(self.PROPERTY_SECTION_NAME, self.PROPERTY_TRAIN_LABEL_NAME))
@@ -86,7 +95,7 @@ class TrainingDataLoader:
 
 
 tdl = TrainingDataLoader("%s%s" % (os.path.dirname(os.path.abspath(__file__)), "/auto_learning.properties"))
-print(np.array(tdl.get_test_data()))
+print(len(tdl.get_test_data()))
 print(len(tdl.get_train_data()))
 print(len(tdl.get_test_label()))
 print(len(tdl.get_train_label()))
