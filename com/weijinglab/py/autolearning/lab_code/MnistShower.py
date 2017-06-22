@@ -8,7 +8,12 @@ import numpy as np
 #
 tdl = TrainingDataLoader("../common/auto_learning.properties")
 
-img = tdl.get_train_data()[412]
-img = img.reshape(28, 28)
-print(np.uint8(img))
+# img = tdl.get_train_data()[412]
+# img = img.reshape(28, 28)
+# print(np.uint8(img))
+# Image.fromarray(np.uint8(img)).show()
+
+
+img = tdl.get_train_data()
+img = img.reshape(600, 2800, 28)[0]
 Image.fromarray(np.uint8(img)).show()
