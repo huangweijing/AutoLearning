@@ -18,7 +18,11 @@ def softmax(x):
 
 
 def cross_entropy_error(y, t):
-    return np.sum(t * np.log(y) * -1)
+    sum = 0
+    for i in range(len(t)):
+        sum += t[i] * np.log(y[i]) * -1
+    return sum
+    #return np.sum(t * np.log(y) * -1)
 
 
 # 関数funcがxにおいて、各次元のdxを求める
