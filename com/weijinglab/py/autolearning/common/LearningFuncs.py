@@ -4,8 +4,15 @@ import numpy as np
 
 # シグモイド関数
 def sigmoid(x):
+    SIGMOID_MAX = 50
     arr = np.array(x)
+    for i in range(len(arr)):
+        if arr[i] >= SIGMOID_MAX:
+            arr[i] = SIGMOID_MAX
+        elif arr[i] <= -SIGMOID_MAX:
+            arr[i] = -SIGMOID_MAX
     arr = 1 / (1 + np.exp(-1 * arr))
+
     return arr
 
 
@@ -22,7 +29,7 @@ def cross_entropy_error(y, t):
     for i in range(len(t)):
         sum += t[i] * np.log(y[i]) * -1
     return sum
-    #return np.sum(t * np.log(y) * -1)
+    # return np.sum(t * np.log(y) * -1)
 
 
 # 関数funcがxにおいて、各次元のdxを求める
@@ -45,6 +52,6 @@ def gradient(func, x):
     return result
 
 
-# print(cross_entropy_error([90, 92444], [0, 1]))
+    # print(cross_entropy_error([90, 92444], [0, 1]))
 
-print(gradient(lambda x: x[0]**2, [9999, 2.4]))
+    # print(gradient(lambda x: x[0]**2, [9999, 2.4]))
