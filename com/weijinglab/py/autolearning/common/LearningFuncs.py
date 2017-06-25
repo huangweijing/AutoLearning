@@ -6,11 +6,13 @@ import numpy as np
 def sigmoid(x):
     SIGMOID_MAX = 50
     arr = np.array(x)
-    for i in range(len(arr)):
-        if arr[i] >= SIGMOID_MAX:
-            arr[i] = SIGMOID_MAX
-        elif arr[i] <= -SIGMOID_MAX:
-            arr[i] = -SIGMOID_MAX
+
+    for n in np.nditer(arr, op_flags=['readwrite']):
+        if n[...] >= SIGMOID_MAX:
+            n[...] = SIGMOID_MAX
+        elif n[...] <= -SIGMOID_MAX:
+            n[...] = -SIGMOID_MAX
+
     arr = 1 / (1 + np.exp(-1 * arr))
 
     return arr
@@ -51,7 +53,3 @@ def gradient(func, x):
         result[idx] = d
     return result
 
-
-    # print(cross_entropy_error([90, 92444], [0, 1]))
-
-    # print(gradient(lambda x: x[0]**2, [9999, 2.4]))
